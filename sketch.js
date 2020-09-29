@@ -60,14 +60,15 @@ function createUI() {
   fill(255);
   stroke(0);
   strokeWeight(2);
-  rect(width*0.75, (height + cardHeight)/2 + margin, cardWidth, buttonHeight, cardRadius);
+  rect(width/2, (height + cardHeight)/2 + 2*margin,
+       cardWidth, buttonHeight, cardRadius);
   
   // Add button text
   fill(0);
   noStroke();
   textAlign(CENTER, CENTER);
   textSize(fontSize);
-  text("Flip Card", width*0.75, (height + cardHeight)/2 + margin);
+  text("Flip Card", width/2, (height + cardHeight)/2 + 2*margin);
   
   // Load reference card image
   var referenceX = width/3.5
@@ -80,22 +81,22 @@ function createUI() {
 }
 
 function setScaling() {
+  // Generate logo size
+  logoHeight = height/5;
+  logoWidth = logoHeight*(709/238);
+  
   // Generate card size and location
-  cardWidth = width/4;
-  cardHeight = cardWidth*(1038/744);
-  cardRadius = cardHeight/75;
-  cardLocationDelta = cardHeight/75;
-  referenceWidth = cardWidth*2;
+  referenceWidth = width/1.90;
   referenceHeight = referenceWidth*(1099/1380);
+  cardHeight = referenceHeight;
+  cardWidth = cardHeight*(744/1038);
+  cardLocationDelta = cardHeight/75;
+  cardRadius = cardHeight/75;
   
   // Generate button and font sizing
   buttonHeight = cardWidth/5;
   margin = cardHeight/10;
   fontSize = buttonHeight/1.5;
-  
-  // Generate logo size
-  logoHeight = height/5;
-  logoWidth = logoHeight*(709/238);
 }
 
 function addCard() {
@@ -123,10 +124,10 @@ function shuffleCards() {
 }
 
 function mouseReleased() {
-  if (mouseX >= width*0.75 - cardWidth/2 &&
-      mouseX <= width*0.75 + cardWidth/2 &&
-      mouseY >= (height + cardHeight - buttonHeight)/2 + margin &&
-      mouseY <= (height + cardHeight + buttonHeight)/2 + margin){
+  if (mouseX >= (width - cardWidth)/2 &&
+      mouseX <= (width + cardWidth)/2 &&
+      mouseY >= (height + cardHeight - buttonHeight)/2 + 2*margin &&
+      mouseY <= (height + cardHeight + buttonHeight)/2 + 2*margin){
     if (thisCard == allCards[12]) {
       thisCard = '';
       setup();
