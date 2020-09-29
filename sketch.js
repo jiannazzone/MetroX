@@ -38,13 +38,18 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowHeight, windowHeight);
+  if (windowHeight < windowWidth) {
+    cnv = createCanvas(windowHeight, windowHeight);
+  } else {
+    cnv = createCanvas(windowWidth, windowWidth);
+  }
   rectMode(CENTER);
   imageMode(CENTER);
   angleMode(DEGREES);
   setScaling();
   createUI();
   shuffleCards();
+  cnv.touchEnded(mouseReleased);
 }
 
 function createUI() {
@@ -104,11 +109,13 @@ function addCard() {
   // Pick a card from the shuffled pile and remove it from the list
   // Add card to screen with a small border
   thisCard = currentCards.pop();
+  rotate(random(-0.5,0.5));
   image(thisCard, cardX, cardY, cardWidth, cardHeight);
   noFill();
   stroke(0);
   strokeWeight(2);
   rect(cardX, cardY, cardWidth, cardHeight, cardRadius);
+  rotate(0);
 }
 
 function shuffleCards() {
