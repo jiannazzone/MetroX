@@ -49,7 +49,7 @@ function setup() {
   setScaling();
   createUI();
   shuffleCards();
-  cnv.touchEnded(mouseReleased);
+  cnv.touchEnded(mouseClicked);
 }
 
 function createUI() {
@@ -123,7 +123,7 @@ function shuffleCards() {
   currentCards = shuffle(allCards);
 }
 
-function mouseReleased() {
+function mouseClicked() {
   if (mouseX >= (width - cardWidth)/2 &&
       mouseX <= (width + cardWidth)/2 &&
       mouseY >= (height + cardHeight - buttonHeight)/2 + 2*margin &&
